@@ -1,0 +1,12 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/node:18
+    resource_class: large
+    steps:
+      - run:
+          name: Check memory available in Node
+          command: |
+            node -e 'console.log(v8.getHeapStatistics().heap_size_limit/(1024*1024*1024))'
