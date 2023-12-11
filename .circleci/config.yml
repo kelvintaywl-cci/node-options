@@ -3,13 +3,13 @@ version: 2.1
 jobs:
   build:
     parameters:
-      node-mem-size:
+      node-options-envvar:
         type: string
         default: ''
     docker:
       - image: cimg/node:18.18.1
     environment:
-      NODE_OPTIONS: '--max-old-space-size=<< parameters.node-mem-size >>'
+      NODE_OPTIONS: '<< parameters.node-options-envvar >>'
     resource_class: large
     steps:
       - run: |
@@ -25,7 +25,8 @@ workflows:
       - build:
           matrix:
             parameters:
-              node-mem-size:
-                - '4096'
-                - '1024'
-                - ''
+              node-options-envvar:
+                - '--max-old-space-size=4096'
+                - '--max-old-space-size=1024'
+                - '--max_old_space_size=4096'
+                - '--max_old_space_size=1024'
