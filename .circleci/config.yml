@@ -26,6 +26,6 @@ workflows:
           matrix:
             parameters:
               node-mem-size:
-                - 4096
-                - 1024
+                - '4096'
+                - '1024'
                 - ''
