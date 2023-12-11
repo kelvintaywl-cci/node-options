@@ -2,11 +2,30 @@ version: 2.1
 
 jobs:
   build:
+    parameters:
+      node-mem-size:
+        type: string
+        default: ''
     docker:
       - image: cimg/node:18.18.1
+    environment:
+      NODE_OPTIONS: '--max-old-space-size=<< parameters.node-mem-size >>'
     resource_class: large
     steps:
+      - run: |
+          printenv NODE_OPTIONS
       - run:
           name: Check memory available in Node
           command: |
             node -e 'console.log(v8.getHeapStatistics().heap_size_limit/(1024*1024*1024))'
+
+workflows:
+  main:
+    jobs:
+      - build:
+          matrix:
+            parameters:
+              node-mem-size:
+                - 4096
+                - 1024
+                - ''
