@@ -13,7 +13,7 @@ jobs:
     resource_class: large
     steps:
       - run: printenv NODE_OPTIONS
-      - run: unset NODE_OPTIONS
+      - run: echo 'unset NODE_OPTIONS' >> $BASH_ENV
       - run: printenv NODE_OPTIONS || true
       - run:
           name: Check memory available in Node
