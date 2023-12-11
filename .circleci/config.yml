@@ -12,8 +12,9 @@ jobs:
       NODE_OPTIONS: '<< parameters.node-options-envvar >>'
     resource_class: large
     steps:
-      - run: |
-          printenv NODE_OPTIONS
+      - run: printenv NODE_OPTIONS
+      - run: unset NODE_OPTIONS
+      - run: printenv NODE_OPTIONS || true
       - run:
           name: Check memory available in Node
           command: |
@@ -27,6 +28,3 @@ workflows:
             parameters:
               node-options-envvar:
                 - '--max-old-space-size=4096'
-                - '--max-old-space-size=1024'
-                - '--max_old_space_size=4096'
-                - '--max_old_space_size=1024'
