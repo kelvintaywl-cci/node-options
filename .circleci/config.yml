@@ -15,6 +15,10 @@ jobs:
       - run: |
           printenv NODE_OPTIONS
       - run:
+          name: install specific Node
+          command: |
+            nvm install -b 20
+      - run:
           name: Check memory available in Node
           command: |
             node -e 'console.log(v8.getHeapStatistics().heap_size_limit/(1024*1024*1024))'
