@@ -27,6 +27,4 @@ workflows:
             parameters:
               node-options-envvar:
                 - '--max-old-space-size=4096'
-                - '--max-old-space-size=1024'
-                - '--max_old_space_size=4096'
                 - '--max_old_space_size=1024'
